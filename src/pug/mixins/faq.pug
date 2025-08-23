@@ -1,0 +1,10 @@
+mixin faq(question, answer)
+    .faq-container 
+        .faq-question-row-container
+            .faq-question= question 
+            .faq-expand-button
+                include ../svg/icon-plus.pug
+            .faq-close-button
+                include ../svg/icon-minus.pug
+
+        .faq-answer= answer 

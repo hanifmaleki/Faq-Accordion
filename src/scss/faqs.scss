@@ -1,0 +1,35 @@
+@use 'variables';
+@use 'faq';
+
+.faqs-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-radius: 1rem;
+    margin: -6rem 1rem 1rem 1rem;
+    background-color: variables.$white;
+    padding: 1.5rem;
+    z-index: 1;
+    max-width: 36rem;
+
+    @include variables.respond(sm) {
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.faqs-title-container {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.faqs-items-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    > *:not(:last-child) {
+        border-bottom: solid 0.1rem variables.$purple-100;
+    }
+}

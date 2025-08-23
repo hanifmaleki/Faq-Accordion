@@ -1,0 +1,56 @@
+@use 'variables';
+
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 1rem;
+}
+
+.faq-question-row-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    :hover {
+        color: variables.$violet;
+        cursor: pointer;
+    }
+}
+
+.faq-question {
+    flex: 1;
+    font-size: variables.$fs-xl;
+    font-weight: 600;
+}
+
+.faq-expand-button, .faq-close-button {
+    align-content: center;
+    flex: 0 0 2rem;
+
+    svg {
+        width: 100%;
+    }
+
+    &.hide {
+        display: none;
+    }
+
+    &.show {
+        display: block;
+    }
+}
+
+.faq-close-button {
+    display: none;
+
+}
+
+.faq-answer {
+    display: none;
+    color: variables.$purple-600;
+
+    &.show {
+        display: block;
+    }
+}

@@ -39,6 +39,10 @@
     {
       "from": "src/js",
       "to": "dist"
+    },
+    {
+        "from": "assets",
+        "to": "dist/assets"
     }
   ]
 }

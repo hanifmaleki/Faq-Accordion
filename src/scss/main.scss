@@ -1,0 +1,12 @@
+@use 'variables';
+
+.header-image {
+    background-image: url("../assets/images/background-pattern-mobile.svg");
+    height: 12rem;
+
+    @include variables.respond(sm) {
+        background-image: url("../assets/images/background-pattern-desktop.svg");
+    }
+
+}
+

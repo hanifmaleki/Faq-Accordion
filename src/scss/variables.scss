@@ -1,0 +1,25 @@
+// Colors
+$white: hsl(0, 100%, 100%);
+$purple-100: hsl(275, 100%, 97%);
+$purple-600: hsl(292, 16%, 49%);
+$purple-950: hsl(292, 42%, 14%);
+$violet: hsl(281, 83%, 54%);
+
+// Font Sizes
+$fs-base: 1rem;
+$fs-lg: 1.125rem;
+$fs-xl: 1.25rem;
+
+// Line-heights
+$lh-lg: 2.25rem;
+
+
+// Breakpoints
+$bp-sm: 480px;
+
+
+@mixin respond($breakpoint) {
+   @if $breakpoint == sm {
+       @media (min-width: $bp-sm) { @content; }
+   }
+}
