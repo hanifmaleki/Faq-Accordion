@@ -6,15 +6,22 @@
     flex-direction: column;
     gap: 1.5rem;
     border-radius: 1rem;
-    margin: -6rem 1rem 1rem 1rem;
+    margin-block-start: clamp(-6rem, -1vw, -12rem);
+    margin-inline-start: calc(1rem + 1vw);
+    margin-inline-end: calc(1rem + 1vw);
+    margin-block-end: calc(1rem + 1vw);
     background-color: variables.$white;
-    padding: 1.5rem;
+    padding: calc(1.5rem + 1vw);
     z-index: 1;
     max-width: 36rem;
 
     @include variables.respond(sm) {
-        margin-left: auto;
-        margin-right: auto;
+        margin-inline-start: auto;
+        margin-inline-end: auto;
+    }
+
+    h1 {
+        font-size: variables.$fs-xxxl;
     }
 }
 

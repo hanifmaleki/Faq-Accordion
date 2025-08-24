@@ -1,96 +1,174 @@
-# Frontend Mentor - FAQ accordion
+# Frontend Mentor - FAQ accordion solution
 
-![Design preview for the FAQ accordion coding challenge](preview.jpg)
+This is a solution to the [FAQ accordion challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/faq-accordion-wyfFdeBwBz). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-## Welcome! 👋
+## Table of contents
 
-Thanks for checking out this front-end coding challenge.
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
+## Overview
 
-**To do this challenge, you need a basic understanding of HTML, CSS and JavaScript.**
+### The challenge
 
-## The challenge
-
-Your challenge is to build out this FAQ accordion and get it looking as close to the design as possible.
-
-You can use any tools you like to help you complete the challenge. So if you've got something you'd like to practice, feel free to give it a go.
-
-Your users should be able to:
+Users should be able to:
 
 - Hide/Show the answer to a question when the question is clicked
 - Navigate the questions and hide/show answers using keyboard navigation alone
 - View the optimal layout for the interface depending on their device's screen size
 - See hover and focus states for all interactive elements on the page
 
-Want some support on the challenge? [Join our community](https://www.frontendmentor.io/community) and ask questions in the **#help** channel.
+### Screenshot
 
-## Where to find everything
+![](./screenshot.png)
 
-Your task is to build out the project to the designs inside the `/design` folder. You will find both a mobile and a desktop version of the design.
+### Links
 
-The designs are in JPG static format. Using JPGs will mean that you'll need to use your best judgment for styles such as `font-size`, `padding` and `margin`.
+- Solution URL: [Solution URL](https://github.com/hanifmaleki/Faq-Accordion)
+- Live Site URL: [Live site URL](https://hanifmaleki.github.io/Faq-Accordion/)
 
-If you would like the Figma design file to inspect the design in more detail, you can [subscribe as a PRO member](https://www.frontendmentor.io/pro).
+## My process
 
-All the required assets for this project are in the `/assets` folder. The images are already exported for the correct screen size and optimized.
+### Built with
+- Semantic **HTML5** markup  
+- **CSS custom properties**  
+- **Flexbox**  
+- **CSS Grid**  
+- **Mobile-first workflow**  
+- **Pug** template language  
+- **SCSS** (with variables and mixins)  
+- **GitHub Actions** (for CI/CD pipeline)  
+- **GitHub Pages** (for deployment)  
+- **Neovim** (as main editor)  
+- **npm scripts** (`watch`, `copy-js`)  
 
-We also include variable and static font files for the required fonts for this project. You can choose to either link to Google Fonts or use the local font files to host the fonts yourself. Note that we've removed the static font files for the font weights that aren't needed for this project.
+### What I learned
+- How to create reusable **Pug mixins** for components (e.g., FAQ items):
 
-There is also a `style-guide.md` file containing the information you'll need, such as color palette and fonts.
+```pug
+mixin faq(question, answer)
+    .faq-container 
+        .faq-question-row-container
+            .faq-question= question 
+            .faq-expand-button
+                include ../svg/icon-plus.pug
+            .faq-close-button
+                include ../svg/icon-minus.pug
 
-## Building your project
+        .faq-answer= answer 
+```
 
-Feel free to use any workflow that you feel comfortable with. Below is a suggested process, but do not feel like you need to follow these steps:
+- How to structure SCSS in a modular way (using variables and separate files):
+```scss
+.faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-block-start: calc(0rem + 1vw);
+    padding-block-end: calc(1rem + 1vw);
+}
 
-1. Initialize your project as a public repository on [GitHub](https://github.com/). Creating a repo will make it easier to share your code with the community if you need help. If you're not sure how to do this, [have a read-through of this Try Git resource](https://try.github.io/).
-2. Configure your repository to publish your code to a web address. This will also be useful if you need some help during a challenge as you can share the URL for your project with your repo URL. There are a number of ways to do this, and we provide some recommendations below.
-3. Look through the designs to start planning out how you'll tackle the project. This step is crucial to help you think ahead for CSS classes to create reusable styles.
-4. Before adding any styles, structure your content with HTML. Writing your HTML first can help focus your attention on creating well-structured content.
-5. Write out the base styles for your project, including general content styles, such as `font-family` and `font-size`.
-6. Start adding styles to the top of the page and work down. Only move on to the next section once you're happy you've completed the area you're working on.
+.faq-question-row-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 
-## Deploying your project
+    :hover {
+        color: variables.$violet;
+        cursor: pointer;
+    }
+}
 
-As mentioned above, there are many ways to host your project for free. Our recommend hosts are:
+.faq-question {
+    flex: 1;
+    font-size: variables.$fs-xl;
+    font-weight: 600;
+}
 
-- [GitHub Pages](https://pages.github.com/)
-- [Vercel](https://vercel.com/)
-- [Netlify](https://www.netlify.com/)
+.faq-expand-button, .faq-close-button {
+    align-content: center;
+    flex: 0 0 2rem;
 
-You can host your site using one of these solutions or any of our other trusted providers. [Read more about our recommended and trusted hosts](https://medium.com/frontend-mentor/frontend-mentor-trusted-hosting-providers-bf000dfebe).
+    svg {
+        width: 100%;
+    }
 
-## Create a custom `README.md`
+    &.hide {
+        display: none;
+    }
 
-We strongly recommend overwriting this `README.md` with a custom one. We've provided a template inside the [`README-template.md`](./README-template.md) file in this starter code.
+    &.show {
+        display: block;
+    }
+}
+```
 
-The template provides a guide for what to add. A custom `README` will help you explain your project and reflect on your learnings. Please feel free to edit our template as much as you like.
+- How to build a vanilla JavaScript class to handle interactive FAQ items:
+```js
+class FaqItem {
+    constructor(container) {
+        this.element = container
+        this.expandButton = container.querySelector('.faq-expand-button')
+        this.closeButton = container.querySelector('.faq-close-button')
+        this.answer = container.querySelector('.faq-answer')
+        this.faqQuestionRowContainer = container.querySelector('.faq-question-row-container')
+        this.isExpanded = false
 
-Once you've added your information to the template, delete this file and rename the `README-template.md` file to `README.md`. That will make it show up as your repository's README file.
+        this.faqQuestionRowContainer.addEventListener('click', event => this.toggleExpansion())
+        this.expandButton.addEventListener('click', event => this.expand(event))
+        this.closeButton.addEventListener('click', event => this.close(event))
+    }
 
-## Submitting your solution
+    toggleExpansion() {
+        if (this.isExpanded) {
+            this.close()
+        } else {
+            this.expand()
+        }
 
-Submit your solution on the platform for the rest of the community to see. Follow our ["Complete guide to submitting solutions"](https://medium.com/frontend-mentor/a-complete-guide-to-submitting-solutions-on-frontend-mentor-ac6384162248) for tips on how to do this.
+        this.isExpanded = !this.isExpanded
+    }
 
-Remember, if you're looking for feedback on your solution, be sure to ask questions when submitting it. The more specific and detailed you are with your questions, the higher the chance you'll get valuable feedback from the community.
+    expand() {
+        this.answer.classList.add('show')
+        this.closeButton.classList.add('show')
+        this.expandButton.classList.add('hide')
+    }
 
-## Sharing your solution
+    close() {
+        this.answer.classList.remove('show')
+        this.closeButton.classList.remove('show')
+        this.expandButton.classList.remove('hide')
+    }
+}
+```
 
-There are multiple places you can share your solution:
+This component is easily used in template:
 
-1. Share your solution page in the **#finished-projects** channel of our [community](https://www.frontendmentor.io/community).
-2. Tweet [@frontendmentor](https://twitter.com/frontendmentor) and mention **@frontendmentor**, including the repo and live URLs in the tweet. We'd love to take a look at what you've built and help share it around.
-3. Share your solution on other social channels like LinkedIn.
-4. Blog about your experience building your project. Writing about your workflow, technical choices, and talking through your code is a brilliant way to reinforce what you've learned. Great platforms to write on are [dev.to](https://dev.to/), [Hashnode](https://hashnode.com/), and [CodeNewbie](https://community.codenewbie.org/).
+```pug
+include mixins/faq.pug
 
-We provide templates to help you share your solution once you've submitted it on the platform. Please do edit them and include specific questions when you're looking for feedback.
++faq(
+    'What is Frontend Mentor, and how will it help me?',
+    `Frontend Mentor offers realistic coding challenges to help developers improve their 
+    frontend coding skills with projects in HTML, CSS, and JavaScript. It\'s suitable for
+    all levels and ideal for portfolio building.`
+)
+```
 
-The more specific you are with your questions the more likely it is that another member of the community will give you feedback.
+### Continued development
+In the next project, I want to explore **internationalization (i18n)** to avoid hardcoding text directly in templates. This will make projects more adaptable to multiple languages 
+and prepare me for real-world multilingual applications.
 
-## Got feedback for us?
+## Author
 
-We love receiving feedback! We're always looking to improve our challenges and our platform. So if you have anything you'd like to mention, please email hi[at]frontendmentor[dot]io.
+- Frontend Mentor - [@hanifmaleki](https://www.frontendmentor.io/profile/hanifmaleki)
 
-This challenge is completely free. Please share it with anyone who will find it useful for practice.
-
-**Have fun building!** 🚀

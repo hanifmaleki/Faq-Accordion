@@ -6,6 +6,7 @@
 
     @include variables.respond(sm) {
         background-image: url("../assets/images/background-pattern-desktop.svg");
+        height: 20rem;
     }
 
 }

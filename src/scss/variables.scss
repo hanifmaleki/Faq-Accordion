@@ -1,14 +1,25 @@
 // Colors
-$white: hsl(0, 100%, 100%);
-$purple-100: hsl(275, 100%, 97%);
-$purple-600: hsl(292, 16%, 49%);
-$purple-950: hsl(292, 42%, 14%);
-$violet: hsl(281, 83%, 54%);
+:root {
+    --color-white: hsl(0, 100%, 100%);
+    --color-purple-100: hsl(275, 100%, 97%);
+    --color-purple-600: hsl(292, 16%, 49%);
+    --color-purple-950: hsl(292, 42%, 14%);
+    --color-violet: hsl(281, 83%, 54%);
+}
+
+$white: var(--color-white);
+$purple-100: var(--color-purple-100);
+$purple-600: var(--color-purple-600);
+$purple-950: var(--color-purple-950);
+$violet: var(--color-violet);
+
 
 // Font Sizes
 $fs-base: 1rem;
 $fs-lg: 1.125rem;
 $fs-xl: 1.25rem;
+$fs-xxl: 2rem;
+$fs-xxxl: 2.5rem;
 
 // Line-heights
 $lh-lg: 2.25rem;

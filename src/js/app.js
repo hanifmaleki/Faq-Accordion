@@ -1,24 +1,28 @@
 window.onload = () => {
     const faqItems = document.querySelectorAll('.faq-container')
-    const app = new App(faqItems)
+    new App(faqItems)
 }
 
 class App {
     constructor(faqItems) {
-        faqItems.forEach(item => new FaqItem(item))
+        faqItems.forEach((item, index) => new FaqItem(item, index === 0))
     }
 }
 
 class FaqItem {
-    constructor(container) {
+    constructor(container, isExpanded = false) {
         this.element = container
         this.expandButton = container.querySelector('.faq-expand-button')
         this.closeButton = container.querySelector('.faq-close-button')
         this.answer = container.querySelector('.faq-answer')
         this.faqQuestionRowContainer = container.querySelector('.faq-question-row-container')
-        this.isExpanded = false
+        this.isExpanded = isExpanded
 
-        this.faqQuestionRowContainer.addEventListener('click', event => this.toggleExpansion())
+        if (this.isExpanded) {
+            this.expand()
+        }
+
+        this.faqQuestionRowContainer.addEventListener('click', event => this.toggleExpansion(event))
         this.expandButton.addEventListener('click', event => this.expand(event))
         this.closeButton.addEventListener('click', event => this.close(event))
     }
